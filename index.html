@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loyola FO/CO Grade Calculator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 400px;
+      margin: 40px auto;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background: #f9f9f9;
+    }
+    h1 {
+      text-align: center;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #0074D9;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #005fa3;
+    }
+    #result {
+      text-align: center;
+      font-size: 18px;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+<img src="https://www.luc.edu/media/lucedu/universitymarketingcommunication/umcsiteimages/interiorimages-1000x560/standards-1000x560/download-logos-1000x560.jpg" 
+       alt="Loyola University Chicago Logo" 
+       style="max-width: 300px; display: block; margin: 0 auto;">
+  <h1>FO/CO Grade Calculator</h1>
+
+  <label for="fo">Foundational Objectives Mastered (0-25):</label>
+  <input type="number" id="fo" min="0" max="25" placeholder="Enter FO's mastered">
+
+  <label for="co">Comprehensive Objectives Mastered (0-15):</label>
+  <input type="number" id="co" min="0" max="15" placeholder="Enter CO's mastered">
+
+  <label for="coTotal">CO Total (M+P) (0-15):</label>
+  <input type="number" id="coTotal" min="0" max="15" placeholder="Enter CO Total">
+  
+  <!-- New inputs added below -->
+  <label for="homework">ALEKs Homework Completion % (0-100):</label>
+  <input type="number" id="homework" min="0" max="100" placeholder="Enter #">
+
+  <label for="groupMissed">Number of Missed Groupwork Sessions:</label>
+  <input type="number" id="groupMissed" min="0" placeholder="Enter #">
+
+  <button onclick="calculateGrade()">Calculate Grade</button>
+
+  <div id="result"></div>
+
+  <script>
+    function calculateGrade() {
+      let fo = parseInt(document.getElementById("fo").value);
+      let co = parseInt(document.getElementById("co").value);
+      let coTotal = parseInt(document.getElementById("coTotal").value);
+      let homework = parseFloat(document.getElementById("homework").value);
+      let groupMissed = parseInt(document.getElementById("groupMissed").value);
+      let grade = "";
+
+      // Validate inputs including new ones
+      if (
+        isNaN(fo) || isNaN(co) || isNaN(coTotal) || isNaN(homework) || isNaN(groupMissed) ||
+        fo < 0 || fo > 25 || co < 0 || co > 15 || coTotal < 0 || coTotal > 15 ||
+        homework < 0 || homework > 100 || groupMissed < 0
+      ) {
+        grade = "❗ Please enter valid numbers within range for all fields.";
+      } else {
+        // Check if fails minimum requirements for F
+        if (homework < 50 || groupMissed > 6) {
+          grade = "🤞🏻 Your grade: F";
+        }
+        // Otherwise check all grades from highest to lowest
+        else if (fo >= 23 && co >= 13 && coTotal >= 14 && homework >= 90 && groupMissed <= 2) {
+          grade = "🎉 Your grade: A";
+        } else if (fo >= 22 && co >= 12 && coTotal >= 14 && homework >= 90 && groupMissed <= 2) {
+          grade = "👏🏻 Your grade: A-";
+        } else if (fo >= 21 && co >= 11 && coTotal >= 13 && homework >= 80 && groupMissed <= 3) {
+          grade = "👍🏻 Your grade: B+";
+        } else if (fo >= 20 && co >= 10 && coTotal >= 12 && homework >= 80 && groupMissed <= 3) {
+          grade = "👍🏻 Your grade: B";
+        } else if (fo >= 19 && co >= 8 &&  coTotal >= 11 &&homework >= 80 && groupMissed <= 3) {
+          grade = "👍🏻 Your grade: B-";
+        } else if (fo >= 18 && co >= 7 && coTotal >= 10 && homework >= 70 && groupMissed <= 4) {
+          grade = "👌🏻 Your grade: C+";
+        } else if (fo >= 17 && co >= 5 && coTotal >= 9 && homework >= 70 && groupMissed <= 4) {
+          grade = "👌🏻 Your grade: C";
+        } else if (fo >= 16 && co >= 4 && coTotal >= 8 && homework >= 70 && groupMissed <= 4) {
+          grade = "👌🏻 Your grade: C-";
+        } else if (homework >= 50 && groupMissed <= 6 && fo >= 8 && co >= 2 && coTotal >= 4) {
+          grade = "👎🏻 Your grade: D";
+        } else {
+          grade = "🤞🏻 Your grade: F";
+        }
+      }
+
+      document.getElementById("result").innerText = grade;
+    }
+  </script>
+
+</body>
+</html>
