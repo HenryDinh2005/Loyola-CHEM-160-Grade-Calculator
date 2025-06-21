@@ -2,5 +2,5 @@
 
 A Pen created on CodePen.
 
-Original URL: [https://codepen.io/Henry-Dinh-the-lessful/pen/ByNqZaE](https://codepen.io/Henry-Dinh-the-lessful/pen/ByNqZaE).
+URL: [https://henrydinh2005.github.io/Loyola-CHEM-160-Grade-Calculator/](https://henrydinh2005.github.io/Loyola-CHEM-160-Grade-Calculator/)
 
